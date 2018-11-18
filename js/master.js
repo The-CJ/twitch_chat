@@ -1,2 +1,2 @@
-var tcc = new TwitchChat("rocketleague");
-tcc.Connect();
+var TC = new TwitchChat("the__cj");
+TC.Connect();
