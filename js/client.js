@@ -45,11 +45,13 @@ class TwitchChat {
       var msg = /^@.+\.tmi\.twitch\.tv PRIVMSG #.+/.exec(line);
       if ( msg ) {
         var m = new Message(line);
+        // that give the user the ability to do.. whatever
         m = custom(m);
+
         if (m == null) {
           return;
         }
-        console.log(m);
+        display_message(m);
       }
     }
   }
