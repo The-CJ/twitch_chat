@@ -1,2 +1,2 @@
-var TC = new TwitchChat("the__cj");
+var TC = new TwitchChat("bobross");
 TC.Connect();
