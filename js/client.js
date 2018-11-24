@@ -37,7 +37,6 @@ class TwitchChat {
     var lines = message.data.split("\n");
     for (var line of lines) {
       if (line == "") { continue }
-      //@broadcaster-lang=en;emote-only=0;followers-only=2;r9k=0;rituals=0;room-id=11558942;slow=0;subs-only=0 :tmi.twitch.tv ROOMSTATE #witwix
 
       if (this.channel_id == 0) {
         var co_id = /room-id=(\d+?)[ ;].+ROOMSTATE/.exec(line);
@@ -47,7 +46,7 @@ class TwitchChat {
         }
       }
 
-      var ping = /^PING (.+)$/.exec(line);
+      var ping = /PING (.+)/.exec(line);
       if ( ping ) {
         this.client.send("PONG "+ping[1]);
       }

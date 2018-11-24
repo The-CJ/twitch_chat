@@ -4,9 +4,10 @@ var channel_id = 0;
 
 // main init
 
-var TC = new TwitchChat("the__cj");
+var TC = new TwitchChat("zfg1");
 TC.OnReady = function () {
   channel_id = this.channel_id;
+  load_badges();
 }
 // generators
 
@@ -16,8 +17,8 @@ function display_message(message) {
   var html_message = generate_message(message);
 
   message_space.appendChild(html_message);
-  if (message_space.children >= 100) {
-    message_space.children[99].remove();
+  if (message_space.children.length >= 100) {
+    message_space.children[0].remove();
   }
 
 }
@@ -95,6 +96,7 @@ function load_badges() {
   try {
     api_call("https://badges.twitch.tv/v1/badges/global/display", function (data) {
       global_badges = JSON.parse(data)
+      load_channel_custom_badges();
     })
   }
   catch (e) {
@@ -102,9 +104,21 @@ function load_badges() {
   }
 }
 
+function load_channel_custom_badges() {
+  try {
+    api_call("https://badges.twitch.tv/v1/badges/channels/"+channel_id+"/display", function (data) {
+      data = JSON.parse(data);
+      if (data["badge_sets"]["subscriber"]) {
+        global_badges["badge_sets"]["subscriber"] = data["badge_sets"]["subscriber"];
+      }
+    })
+  }
+  catch (e) {
+    console.log("error loading channel badges");
+  }
+}
 
 // load finished
 document.body.onload = function () {
   TC.Connect();
-  load_badges();
 }
