@@ -69,11 +69,18 @@ function generate_badges(object, badges) {
 
 function generate_content(object, message) {
   let content = document.createTextNode(message.content);
+  content = generate_emotes(content, message);
   object.appendChild(content);
 
   return object;
 }
 
+function generate_emotes(content, message) {
+  // https://static-cdn.jtvnw.net/emoticons/v1/425618/2.0 2x
+
+
+  return object;
+}
 // utilitys
 
 const create_Element = ( domstring ) => {

@@ -10,3 +10,8 @@ img[badge] {
   height: 20px;
   width: 20px;
 }
+
+#message_space {
+  position: absolute;
+  bottom: 0;
+}
