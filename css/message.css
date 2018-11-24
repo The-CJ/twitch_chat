@@ -2,6 +2,7 @@
   width: 100%;
 }
 .message-badges {
+  height: 22px;
 }
 
 img[badge] {
