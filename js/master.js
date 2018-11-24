@@ -1,13 +1,14 @@
-// badges
+// vars
 var global_badges = {};
-load_badges();
+var channel_id = 0;
 
 // main init
 
 var TC = new TwitchChat("the__cj");
-TC.Connect();
-
-////
+TC.OnReady = function () {
+  channel_id = this.channel_id;
+}
+// generators
 
 function display_message(message) {
 
@@ -99,4 +100,11 @@ function load_badges() {
   catch (e) {
     console.log("error loading badges");
   }
+}
+
+
+// load finished
+document.body.onload = function () {
+  TC.Connect();
+  load_badges();
 }
