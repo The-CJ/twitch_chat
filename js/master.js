@@ -4,7 +4,7 @@ var channel_id = 0;
 
 // main init
 
-var TC = new TwitchChat("zfg1");
+var TC = new TwitchChat("admiralbahroo");
 TC.OnReady = function () {
   channel_id = this.channel_id;
   load_badges();
@@ -79,7 +79,7 @@ function generate_emotes(content, message) {
   // https://static-cdn.jtvnw.net/emoticons/v1/425618/2.0 2x
 
 
-  return object;
+  return content;
 }
 // utilitys
 

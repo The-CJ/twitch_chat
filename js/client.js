@@ -30,7 +30,7 @@ class TwitchChat {
     this.client.send("CAP REQ :twitch.tv/tags");
     this.client.send("CAP REQ :twitch.tv/commands");
     this.client.send("CAP REQ :twitch.tv/membership");
-    this.client.send("JOIN #"+this.channel);
+    this.client.send("JOIN #"+this.channel.toLowerCase());
   }
 
   ProcessMessage(message) {
