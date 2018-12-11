@@ -81,6 +81,7 @@ function generate_emotes(content, message) {
 
   return content;
 }
+
 // utilitys
 
 const create_Element = ( domstring ) => {
@@ -115,9 +116,13 @@ function load_channel_custom_badges() {
   try {
     api_call("https://badges.twitch.tv/v1/badges/channels/"+channel_id+"/display", function (data) {
       data = JSON.parse(data);
-      if (data["badge_sets"]["subscriber"]) {
-        global_badges["badge_sets"]["subscriber"] = data["badge_sets"]["subscriber"];
+
+      for (var b_set in data["badge_sets"]) {
+        for (var b_set_version in data["badge_sets"][b_set]['versions']) {
+          global_badges["badge_sets"][b_set]['versions'][b_set_version] = data["badge_sets"][b_set]['versions'][b_set_version];
+        }
       }
+
     })
   }
   catch (e) {
