@@ -7,8 +7,18 @@
 
 img[badge] {
   margin: 1px;
-  height: 20px;
-  width: 20px;
+  height: 22px;
+  width: 22px;
+}
+
+img[emote] {
+  margin: 1px;
+  height: 22px;
+  width: 22px;
+}
+
+span[word] {
+  margin: 0 3px;
 }
 
 #message_space {

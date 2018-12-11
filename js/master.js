@@ -28,7 +28,7 @@ function generate_message(message) {
   let message_html = create_Element('<div class="message center-item-row"></div>');
   let message_badges_html = create_Element('<div class="message-badges"></div>');
   let message_name_html = create_Element('<div class="message-name"></div>');
-  let message_content_html = create_Element('<div class="message-content"></div>');
+  let message_content_html = create_Element('<div class="message-content center-item-row"></div>');
 
   message_badges_html = generate_badges(message_badges_html, message.badges);
   message_name_html = generate_name(message_name_html, message);
@@ -68,18 +68,34 @@ function generate_badges(object, badges) {
 }
 
 function generate_content(object, message) {
-  let content = document.createTextNode(message.content);
-  content = generate_emotes(content, message);
-  object.appendChild(content);
+  var message_parts = message.content.split(" ");
+  if (message.emotes.length) {
+    for (emote of message.emotes) {
+      var link = "https://static-cdn.jtvnw.net/emoticons/v1/"+emote.id+"/2.0";
+      var img_element = create_Element('<img emote src="'+link+'">');
+
+      // replace imagestring in parts
+      for (part in message_parts) {
+        if (message_parts[part] == emote.name) {
+          message_parts[part] = img_element;
+        }
+      }
+
+    }
+  }
+
+  // construngt message content
+  for (p of message_parts) {
+    if (typeof p == "string") {
+      let tp = create_Element("<span word></span>");
+      tp.appendChild( document.createTextNode(p) );
+      object.appendChild(tp);
+    } else {
+      object.appendChild( p );
+    }
+  }
 
   return object;
-}
-
-function generate_emotes(content, message) {
-  // https://static-cdn.jtvnw.net/emoticons/v1/425618/2.0 2x
-
-
-  return content;
 }
 
 // utilitys
